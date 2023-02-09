@@ -1,0 +1,17 @@
+import scrapy
+
+class AluraBot(scrapy.Spider):
+    name="Alura Bot"
+    start_urls = ["https://www.alura.com.br/cursos-online-tecnologia"]  
+     
+    def parse(self, response):
+        SELETOR=".subcategoria__item"
+        cursos =[]
+        for categoria in response.css(SELETOR):
+            curso ={}
+            NOME_SELETOR=".card-curso__nome"
+            curso['nome'] = categoria.css(NOME_SELETOR).extract_first()
+            print (curso)
+            
+            cursos.append(curso)
+    
